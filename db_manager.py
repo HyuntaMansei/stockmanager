@@ -1,7 +1,7 @@
 #mysql db와 연결하여 data를 처리하는 클래스
 import configparser
-import pymysql
 import os
+import pymysql
 
 config = configparser.ConfigParser()
 conf_path = os.getcwd() + os.sep + 'ignore' + os.sep + 'config.ini'
@@ -17,7 +17,7 @@ class DbManager:
         )
         self.cur = self.cnx.cursor()
 
-    def write_stock_info(self, stock_info: {}):
+    def write_stock_basic_info(self, stock_info: {}):
         for key, info in stock_info.items():
             sql = """
             insert into STOCK_BASIC_INFO_TB 
@@ -29,7 +29,6 @@ class DbManager:
             data = (key, info['name'], info['clas'])
             self.cur.execute(sql, data)
         self.cnx.commit()
-
     def exec_sql(self, sql, data=''):
         if not data == '':
             self.cur.execute(sql, data)
@@ -37,7 +36,6 @@ class DbManager:
         else:
             self.cur.execute(sql)
             self.cnx.commit()
-
     def show_table(self):
         sql = "show tables;"
         self.cur.execute(sql)
