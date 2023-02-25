@@ -1,8 +1,8 @@
-#mysql db와 연결하여 data를 처리하는 클래스
 import configparser
 import os
 import pymysql
 
+#mysql db와 연결하여 data를 처리하는 클래스
 config = configparser.ConfigParser()
 conf_path = os.getcwd() + os.sep + 'ignore' + os.sep + 'config.ini'
 config.read(conf_path, encoding='utf-8')

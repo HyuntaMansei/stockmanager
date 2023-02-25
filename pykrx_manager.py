@@ -10,6 +10,7 @@ class pykrxManager:
         ]
         self.market_ticker_list_dic = {}
         self.basic_stock_info_dic = {}
+        # self.stock = pykrx.stock.stock_api.
 
     def set_market_ticker_list_dic(self):
         for m in self.market_list:
