@@ -11,22 +11,25 @@ con = config['DB_CONFIG']
 
 class DbManager:
     def __init__(self):
+        self.connect()
+    def connect(self):
         self.cnx = pymysql.connect(
             user=con['user'], password=con['password'], host=con['host'], port=int(con['port']),
             charset=con['charset'], db=con['db']
         )
         self.cur = self.cnx.cursor()
-
-    def write_stock_basic_info(self, stock_info: {}):
-        for key, info in stock_info.items():
+    def close(self):
+        self.cnx.close()
+    def write_basic_stock_info(self, stock_info: {}):
+        for k, v in stock_info.items():
             sql = """
-            insert into STOCK_BASIC_INFO_TB 
-            (stock_code, stock_name, market_clas, created_date) 
+            insert into BASIC_STOCK_INFO_TB 
+            (stock_code, stock_name, market, created_date) 
             values (%s, %s, %s, NOW())
             on duplicate key update 
-            stock_name = values(stock_name), market_clas = values(market_clas), is_updated = 'y', updated_date = now();
+            stock_name = values(stock_name), market = values(market), is_updated = 'y', updated_date = now();
             """
-            data = (key, info['name'], info['clas'])
+            data = (k, v['name'], v['market'])
             self.cur.execute(sql, data)
         self.cnx.commit()
     def exec_sql(self, sql, data=''):

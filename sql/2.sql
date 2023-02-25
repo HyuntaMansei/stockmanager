@@ -1,0 +1,43 @@
+USE stock;
+SHOW DATABASES;
+SHOW TABLES;
+
+SHOW CREATE TABLE BASIC_STOCK_INFO_TB;
+SHOW CREATE TABLE DAILY_STOCK_PRICE_TB;
+
+DROP TABLE IF EXISTS `BASIC_STOCK_INFO_TB`;
+CREATE TABLE `BASIC_STOCK_INFO_TB` (
+   `id` INT(11) NOT NULL AUTO_INCREMENT,
+   `ticker` VARCHAR(10) DEFAULT NULL,
+   `stock_code` VARCHAR(10) NOT NULL,
+   `stock_name` VARCHAR(255) DEFAULT NULL,
+   `market` VARCHAR(20) DEFAULT NULL,
+   `created_date` DATETIME NOT NULL,
+   `is_updated` CHAR(1) DEFAULT NULL,
+   `updated_date` DATETIME DEFAULT NULL,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `stock_code` (`stock_code`)
+ );
+SELECT * FROM `BASIC_STOCK_INFO_TB` WHERE market='konex';
+ 
+DROP TABLE IF EXISTS `DAILY_STOCK_PRICE_TB`;
+CREATE TABLE `DAILY_STOCK_PRICE_TB` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `trading_date` DATETIME DEFAULT NULL,
+    `ticker` VARCHAR(10) NOT NULL,
+    `stock_code` VARCHAR(10) NOT NULL,
+    `open_price` DECIMAL(10 , 2 ) DEFAULT NULL,
+    `high_price` DECIMAL(10 , 2 ) DEFAULT NULL,
+    `low_price` DECIMAL(10 , 2 ) DEFAULT NULL,
+    `close_price` DECIMAL(10 , 2 ) DEFAULT NULL,
+    `volume` INT(10) UNSIGNED DEFAULT NULL,
+    `adj1_price` DECIMAL(10 , 2 ) DEFAULT NULL,
+    `adj2_price` DECIMAL(10 , 2 ) DEFAULT NULL,
+    `created_date` DATETIME NOT NULL,
+    `is_updated` CHAR(1) DEFAULT NULL,
+    `updated_date` DATETIME DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `ticker` (`ticker`),
+    UNIQUE KEY `stock_code` (`stock_code`)
+);
+SELECT * FROM `DAILY_STOCK_PRICE_TB`;
