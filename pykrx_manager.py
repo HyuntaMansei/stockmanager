@@ -1,4 +1,4 @@
-from pykrx import stock
+from mpykrx import stock
 from time import sleep
 
 class pykrxManager:
