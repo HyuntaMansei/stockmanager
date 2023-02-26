@@ -26,7 +26,8 @@ on duplicate key update stock_name = values(stock_name), market_clas = values(ma
 
 drop table if exists STOCK_BASIC_INFO_TB;
 
+use stock;
 desc STOCK_BASIC_INFO_TB;
-select * from STOCK_BASIC_INFO_TB where market_clas = 'etf';
+select * from STOCK_BASIC_INFO_TB where market_clas = 'kospi';
 
 delete from STOCK_BASIC_INFO_TB where id=1;
